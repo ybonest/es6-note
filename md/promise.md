@@ -145,3 +145,18 @@ promise.then((result) => {
     </script>
     ```
     > 注意：链式调用时前一个then里面须得返回一个Promise实例，否则之后的then无法调用，并且后续的then需要等待前面then的Promise实例执行完毕才会执行
+
++ Promise.prototype.catch() --- 推荐使用catch()而不是使用then的中的第二个回调函数处理错误
+    - Promise.prototype.catch方法是.then(null,rejection)的别名，用于指定发生错误时的回调函数，即异步操作状态变为rejected时的执行
+    - Promise对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获
+
+    ```
+    XX1.then(post=>{
+        return XX2;
+    }).then(post=>{
+
+    }).catch((err)=>{
+        //处理前面所以Promise产生的错误
+    })
+    ```
+
