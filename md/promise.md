@@ -93,6 +93,7 @@ promise.then((result) => {
 ```
 
 + Promise的reject函数通常传递错误参数，而resolve函数除了正常值外，还可以传递其他Promise实例
+    + 实例[链接]((https://ybonest.github.io/es6-note/html/resolvearg.html))
 ```
 <script>
     const p1 = new Promise(function(resolve,reject){
@@ -113,4 +114,7 @@ promise.then((result) => {
 </script>
 ```
 
-> 以上代码最终打印
+> 以上代码1s后打印p2，然后执行resolve(p1),由于resolve函数获取的参数是Promise的一个实例，所以导致p2的状态由p1接管了，最终到3s后输出p1，然后p1执行reject()部分，返回错误，导致catch部分被执行
+
+***
++ Promise.prototype.then()
