@@ -1,0 +1,1 @@
+- [Promise对象](/md/promise.md)
