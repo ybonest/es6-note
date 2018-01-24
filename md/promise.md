@@ -91,3 +91,26 @@ promise.then((result) => {
     });
 </script>
 ```
+
++ Promise的reject函数通常传递错误参数，而resolve函数除了正常值外，还可以传递其他Promise实例
+```
+<script>
+    const p1 = new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            console.log("p1");
+            reject(new Error('fail'));
+        },3000)
+    });
+    const p2 = new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            console.log("p2");
+            resolve(p1)
+        },1000)
+    })
+
+    p2.then( result => console.log(result))
+    .catch(error => console.log(error))
+</script>
+```
+
+> 以上代码最终打印
