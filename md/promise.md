@@ -1,8 +1,10 @@
 ### Promise对象
 ----------本篇主要参考阮一峰ESMAScript6入门，详请参考[ECMAScript6入门](http://es6.ruanyifeng.com/#docs/promise)
 
+
 #### 介绍
 + Promise是一种异步解决方案，可以使异步操作以同步的方式展现，以避免回调函数导致的层层嵌套问题。
+
 
 #### 特点
 + Promise三种状态：pending(进行中)、fulfilled(已成功)、rejected(已失败)
@@ -10,10 +12,12 @@
         1. pending ---->  fufilled
         2. pending ---->  rejected
 
+
 #### 缺点
 + Promise一旦新建就立即执行，无法中途取消
 + 其次，如果不设置回调函数，Promise内部抛出错误不会反应到外部
 + 当处于pending状态时，无法得知目前进展到哪一个阶段
+
 
 #### 用法
 ```
@@ -52,3 +56,4 @@ promise.then((result) => {
     console.log(result);
 })
 ```
+
