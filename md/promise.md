@@ -57,3 +57,37 @@ promise.then((result) => {
 })
 ```
 
++ 实例二(ajax请求)
+
+```
+<script>
+    const getJson = function(url) {
+        const promise = new Promise(function(resolve,reject){
+            const handFn = function() {
+                if(this.readyState !==4 ){
+                    return;
+                }    
+                if(this.status === 200 ){
+                    resolve(this.response); //成功后将数据返回resolve对应的回调函数
+                }else {
+                    //失败-将错误信息传入reject对应的回调函数
+                    reject(new Error(this.statusText))
+                }
+            }
+
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET",url);
+            xmlHttp.onreadystatechange = handFn;
+            xmlHttp.responseType = "json";
+            xmlHttp.setRequestHeader("Accept","application/json");
+            xmlHttp.send();
+        })
+        return promise;
+    }
+    getJson("./myjson.json").then(function(json){
+        console.log(json);
+    },function(error){
+        console.error(error);
+    });
+</script>
+```
