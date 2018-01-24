@@ -44,7 +44,7 @@ promise.then(function(value){
 })
 ```
 
-+ 实例一[链接](/html/promise.html)
++ 实例一[链接](https://ybonest.github.io/es6-note/html/promise.html)
 ```
 //es6 Promise对象
 const promise = new Promise(function(resolve,reject){
