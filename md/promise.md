@@ -93,7 +93,7 @@ promise.then((result) => {
 ```
 
 + Promise的reject函数通常传递错误参数，而resolve函数除了正常值外，还可以传递其他Promise实例
-    + 实例[链接]((https://ybonest.github.io/es6-note/html/resolvearg.html))
+    + 实例[链接](https://ybonest.github.io/es6-note/html/resolvearg.html)
 ```
 <script>
     const p1 = new Promise(function(resolve,reject){
@@ -118,3 +118,30 @@ promise.then((result) => {
 
 ***
 + Promise.prototype.then()
+    1. 作用：为Promise实例添加状态改变时的回调函数
+        - 参数一:resolved状态的回调函数
+        - 参数二:rejected状态的回调函数
+    2. 链式调用：可以指定一组依次调用的回调函数
+
+    实例[链接](https://ybonest.github.io/es6-note/html/then.html)
+    ```
+    <script>
+        var timeOutFn = (arg) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(arg);
+                    resolve(arg+" resolve");
+                }, 2000)
+            })
+        }
+        timeOutFn("p1").then((reusult) => {
+            <!-- return timeOutFn('p2'); -->
+            console.log(reusult)
+        }).then((reusult)=>{
+            console.log(reusult)
+        },(err)=>{
+            console.log(err);
+        })
+    </script>
+    ```
+    > 注意：链式调用时前一个then里面须得返回一个Promise实例，否则之后的then无法调用，并且后续的then需要等待前面then的Promise实例执行完毕才会执行
