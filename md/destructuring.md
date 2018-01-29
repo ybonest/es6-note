@@ -55,8 +55,7 @@ let obj = {
     'Hello',
     { y: 'World' }
   ]
-};
-
+}
 let { p: [x, { y }] } = obj;
 x // "Hello"
 y // "World"
