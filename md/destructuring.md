@@ -34,3 +34,44 @@ let [x=y,y=1] = []; //y is not defined
 ```
 
 #### 对象的解构赋值
++ `let{foo,bar} = { foo:"aaa",bar:"bbb"}`，结果foo="aaa",bar="bbb"
++ 与数组解构相比，对象的解构赋值对对象属性的顺序没有要求，只要属性名对应即可
+```
+let {bar,foo} = { foo:"aaa",bar:"bbb"}
+//foo="aaa"
+//bar="bbb"
+```
+下面是含有键值对的解构赋值
+```
+let {foo:baz} = {foo:"aaa",bar:"bbb"}
+// baz="aaa"
+// 而foo报错，foo is not defined
+```
+
++ 与数组一样，对象解构也可以使用嵌套
+```
+let obj = {
+  p: [
+    'Hello',
+    { y: 'World' }
+  ]
+};
+
+let { p: [x, { y }] } = obj;
+x // "Hello"
+y // "World"
+```
+
++ 使用默认值(右方对应值必须严格等于undefined)
+```
+var {x=3} = {} //x=3
+```
+
++ 对象的解构赋值，可以很方便的将现有对象的方法赋值到某个变量
+```
+let {log,sin,cos} = Math;
+```
+
+
+
+

@@ -2,31 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        var timeOutFn = (arg) => {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    console.log(arg);
-                    resolve(arg+" resolve");
-                }, 2000)
-            })
-        }
-        timeOutFn("p1").then((reusult) => {
-            // return timeOutFn('p2');
-            console.log(reusult)
-        }).then((reusult)=>{
-            console.log(reusult)
-        },(err)=>{
-            console.log(err);
-        })
-    </script>
+  <script>
+    var timeOutFn = (arg) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(arg);
+          resolve(arg + " resolve");
+        }, 2000)
+      })
+    }
+    timeOutFn("p1").then((reusult) => {
+      // return timeOutFn('p2');
+      console.log(reusult)
+    }).then((reusult) => {
+      console.log(reusult)
+    }, (err) => {
+      console.log(err);
+    })
+  </script>
 </body>
 
 </html>
