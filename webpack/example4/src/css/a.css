@@ -1,0 +1,21 @@
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li{
+  height: 30px;
+}
+html,body{
+  padding: 0;
+  margin: 0;
+}
+.common{
+  height: 300px;
+  width: 400px;
+}
+.one{
+  background-image: url("../images/1.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
