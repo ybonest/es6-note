@@ -53,6 +53,7 @@ const config = {
 ### 出口[output]
 output属性告诉webpack在哪里输出它所创建的bundles,以及如何明明这些文件
 + webpack.config.js
+
 ```
 const path = require('path');
 
@@ -65,73 +66,3 @@ module.exports = {
 }
 ```
 
-+ 多个入口起点
-```
-module.exports = {
-  entry:{
-    app:'./src/app.js',
-    search:'./src/search.js'
-  },
-  output:{
-    filename:'[name].js',
-    path:__dirname+'/dist'
-  }
-}
-//最终输出到dist目录app.js与search.js两个文件
-```
-
-
-### loader
-loader让webpack能够去处理那些非JavaScript文件
-+ webpack的配置中loader有两个目标
-  - 识别出应该被对应的loader进行转换的那些文件
-  - 转换这些文件，从而使其能够被添加到依赖图中(并且最终添加到bundle中)
-
-+ webpack.config.js配置
-```
-const path = require('path');
-
-const config = {
-  entry:'./path/file.js',
-  output:{
-    path:path.resolve(__dirname,'dist'),
-    filename:'my-first-webpack.bundle.js'
-  },
-  module:{
-    rules:{
-      {test:/\.txt$/,use:'raw-loader'}
-    }
-  }
-}
-
-module.exports = config
-```
-
-### 插件[plugins]
-loader被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务
-+ 使用步骤
-  - require()相关插件
-  - 将插件添加到plugins数组中
-+ webpack.config.js配置
-```
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack);//访问内置插件
-const path = require('path');
-
-const config = {
-  entry:'./path/file.js',
-  output:{
-    path:path.join(__dirname,'/dist'),
-    filename:'bundle.js'
-  },
-  module:{
-    rules:[
-      {test:/\.txt$/,use:'raw-loader'}
-    ]
-  },
-  plugins:[
-    new webpack.optimize.UnlifyJsPlugin(),
-    new HtmlWebpackPlugin({template:'./src/index.html'})
-  ]
-}
-```
