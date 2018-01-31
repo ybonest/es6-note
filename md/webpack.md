@@ -105,9 +105,9 @@ const config = {
     }
   }
 }
-
 module.exports = config
 ```
+
 ### 插件[plugins]
 loader被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务
 + 使用步骤
