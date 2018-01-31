@@ -84,8 +84,8 @@ loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！
   }
   ```
 
-3. 转换scss文件
-  + 创建scss样式文件，并在要打包的js文件中引入，本例中是在index.js中引入的css-->`import './css/b.scss'`
+3. 转换less文件
+  + 创建less样式文件，并在要打包的js文件中引入，本例中是在index.js中引入的css-->`import './css/b.scss'`
   + 安装依赖loader
     - style-loader 执行命令 `npm i style-loader -D`
     - css-loader 执行命令 `npm i css-loader -D`
