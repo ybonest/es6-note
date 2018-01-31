@@ -62,7 +62,7 @@ devDependencies代表开发依赖
 6. 此时由于生成的bundle.js被托管于根目录，所以index.html中引入bundle.js应该是`<script src="/bundle.js"></script>`
 7. url中输入`localhost:8080/src/index.html`或`localhost:8080/src`即可访问index.html
 
-代码部分
+**代码部分**
 + webpack.config.js配置
 ```
 const path = require('path');
