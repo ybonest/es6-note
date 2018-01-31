@@ -66,3 +66,45 @@ module.exports = {
 }
 ```
 
++ 多个入口起点
+```
+module.exports = {
+  entry:{
+    app:'./src/app.js',
+    search:'./src/search.js'
+  },
+  output:{
+    filename:'[name].js',
+    path:__dirname+'/dist'
+  }
+}
+//最终输出到dist目录app.js与search.js两个文件
+```
+
+
+### loader
+loader让webpack能够去处理那些非JavaScript文件
++ webpack的配置中loader有两个目标
+  - 识别出应该被对应的loader进行转换的那些文件
+  - 转换这些文件，从而使其能够被添加到依赖图中(并且最终添加到bundle中)
+
++ webpack.config.js配置
+```
+const path = require('path');
+
+const config = {
+  entry:'./path/file.js',
+  output:{
+    path:path.resolve(__dirname,'dist'),
+    filename:'my-first-webpack.bundle.js'
+  },
+  module:{
+    rules:{
+      {test:/\.txt$/,use:'raw-loader'}
+    }
+  }
+}
+
+module.exports = config
+```
+
