@@ -71,6 +71,53 @@ var {x=3} = {} //x=3
 let {log,sin,cos} = Math;
 ```
 
+#### 字符串的解构赋值
+```
+const [a,b,c,d,e] = 'hello';
+a // 'h'
+b // 'e'
+c // 'l'
+d // 'l'
+e // 'o'
+```
 
+#### 函数参数的解构赋值
++ 例一
+```
+function add([x,y]){
+  return x + y;
+}
+add([1,2]);
+```
 
++ 例二
+```
+[[1,2],[3,4]].map(([a,b]) => a+b);
+```
 
++ 例三
+```
+function move({x=0,y=0} = {}){
+  return [x,y];
+}
+move({x:3,y:8});  //[3,8]
+move({x:3});  //[3,0]
+move({}); //[0,0] 
+```
+
++ 例四
+```
+function move({x,y} = {x:0,y:0}){
+  return [x,y];
+}
+move({x:3,y:8});  //[3,8]
+move({x:3});  //[3,undefined]
+move({}); //[undefined,undefined]
+move(); [0,0]
+```
+
++ 例五
+```
+[1,undefined,3].map((x = 'yes) => x);
+//[1,'yes',3]
+```
