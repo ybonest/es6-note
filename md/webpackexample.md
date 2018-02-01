@@ -216,8 +216,8 @@ loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！
   ```
 
 4. 处理css路径问题
-+ 此处主要引入url-loader和file-loader
-具体配置如下
+  + 此处主要引入url-loader和file-loader
+  具体配置如下
 
 ```
 module.exports = {
