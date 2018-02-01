@@ -54,3 +54,40 @@ funcs3.forEach(function(func){
   func();
 })
 ```
+
++ let总结
+  - let声明的变量不存在变量提升
+  - let声明的变量具有块级作用域
+  - 不允许重复声明
+  - let声明的变量具有暂时性死区，也就是说如果在外部作用域有相同名称的变量，let所在作用域的变量不受外部变量影响，且let作用域访问不到与外部与let声明的变量名相同的变量
+  ```
+  var a = 1;
+  if(true){
+    a = 2;  //Uncaught ReferenceError: a is not defined
+    let a;
+  }
+  ```
+
+### const命令
++ const声明一个只读的常量，一旦声明，常量的值就不能改变
+```
+const a = 1;
+console.log(a);   //1
+a = 2; //报错
+```
+
++ const声明的常量必须立即赋值，否则报错
+```
+const foo;//报错Uncaught SyntaxError: Missing initializer in const declaration
+```
+
++ const的作用域和let命令相同，只在声明所在的块级作用域有效
+```
+if(true){
+  const a = 5;
+}
+console.log(a) //报错
+```
+
++ const声明的常量同样存在暂时性死区，只能在声明之后的位置使用
++ const声明的常量不可重复
