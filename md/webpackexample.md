@@ -324,3 +324,80 @@ $(function(){
   $('li:odd').css('background','yellow');
 })
 ```
+
+
+### 实例五
+本例是引入了babel，babel是用来处理高级JS语法
+
+babel配置方式
++ 1.安装`babel-core`和`babel-loader`以及`babel-plugin-transform-runtime`
+  - 执行`npm i babel-core babel-loader babel-plugin-transform-runtime -D`
++ 2.安装`babel-preset-env`和`babel-preset-stage-0`
+  - `npm i babel-preset-env babel-preset-stage-0 -D`
++ 3.在module中的rules添加配置:`{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }`从而排除node_modules，以防打包时将node_modules中的内容打包进去
++ 4.根目录添加.babelrc的babel配置文件，里面配置了babel用到到的语法和插件，注意，这个文件中，必须符合JSON规范，因此，不能使用单引号和注释
+```
+{
+  "presets": ["env", "stage-0"],
+  "plugins": ["transform-runtime"]
+}
+```
+
+代码展示
++ webpack.config.js配置
+
+```
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry:path.join(__dirname,'./src/index.js'),
+  output:{
+    path:path.join(__dirname,'./dist'),
+    filename:'bundle.js'
+  },
+  plugins:[
+    new HtmlWebpackPlugin({
+      template:path.join(__dirname,'./src/index.html'),
+      filename:'index.html'
+    })
+  ],
+  module:{
+    rules:[
+      //注意，此处一定要把node_modules添加到exclude排除项，否则node_modules中的东西也将被打包，最终导致错误
+      {test:/\.js$/,use:'babel-loader',exclude:/node_modules/}
+    ]
+  }
+}
+```
+
++ index.js
+```
+import $ from 'jquery';
+$(function () {
+  $('li:odd').css('background', 'red');
+  $('li:even').css('background', 'yellow');
+})
+class Person {
+  static info = { country: 'China' }
+}
+console.log(Person.info);
+```
+
+### 实例六
+本例主要介绍在package.json文件中配置webpack-dev-server启动方式,如下
+```
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --open chrome --port 3000 --host 192.168.171.58 --compress --progress --hot"
+  },
+```
+
++ `--open chrome`表示默认执行后自动打开浏览器，并且以chrome浏览器打开
++ `--port 3000`设置`webpack-dev-server`启动端口，默认8080
++ `--host 192.168.163.31`设置`webpack-dev-server`启动IP
++ `--compress`设置打包文件压缩
++ `--progress`设置启动时在控制台所显示进度条
++ `--hot`热更新/热刷新/热重载,更够提高打包的效率，因为热更新只是把需要重新打包的代码编译了一下，并以补丁的形式，热更新到了页面中，并没有重新编译整个项目,而且`--hot`也能够实现页面的无刷新重载(这个无刷新重载对JS无效，只对CSS有效)
+
+以上六例详细代码请到github仓库[下载](https://github.com/ybonest/es6-note.git),代码存放在webpack目录下
