@@ -216,8 +216,8 @@ loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！
   ```
 
 4. 处理css路径问题
-  + 此处主要引入url-loader和file-loader
-  具体配置如下
+此处主要引入url-loader和file-loader
+具体配置如下
 
 ```
 module.exports = {
@@ -251,3 +251,76 @@ module.exports = {
 }
 ```
 
+实例代码展示
++ package.json中的开发依赖
+
+```
+"devDependencies": {
+  "url-loader": "^0.6.2",
+  "css-loader": "^0.28.9",
+  "file-loader": "^1.1.6",
+  "html-webpack-plugin": "^2.30.1",
+  "less": "^2.7.3",
+  "less-loader": "^4.0.5",
+  "node-sass": "^4.7.2",
+  "sass-loader": "^6.0.6",
+  "style-loader": "^0.20.1",
+  "webpack": "^3.10.0",
+  "webpack-dev-server": "^2.11.1"
+}
+```
+
++ webpack.config.js配置
+
+```
+const path = require('path');
+
+//html-webpack-plugin插件的作用就是将指定的html文件复制一份托管到内存中
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry:path.join(__dirname,'./src/index.js'),
+  output:{
+    path:path.join(__dirname,'./dist'),
+    filename:'bundle.js'
+  },
+  plugins:[ //plugins专门配置webpack相关插件
+    new HtmlWebpackPlugin({
+      template:path.join(__dirname,'./src/index.html'), //制定要被托管的html文件以及其路径
+      filename:'index.html' //指定要生成的页面的名称，也就是被托管到内存中的html文件，默认托管到根目录
+    })
+  ],
+  module:{  //配置第三方loader模块
+    rules:[ //第三方文件后缀匹配规则以及loader，注意如果存在多个loader，loader调用顺序是从后向前
+      {test:/\.css$/,use:['style-loader','css-loader']},  //配置css文件loader   
+      {test:/\.scss$/,use:['style-loader','css-loader','sass-loader']},
+      {test:/\.less$/,use:['style-loader','css-loader','less-loader']},
+      //因为此处index以及bundle.js都是托管到内存中的，所以css加载图片时需要配置此项，否则npm run dev启动报错
+      // {test:/\.jpg|png|gif|bmp$/,use:'url-loader'}  
+      //默认情况下使用url-loader将把图片转为base64格式的图片，如果不想改变图片格式，可以下载file-loader，
+      //增加limit限制,当limit限制小于图片大小时(右键图片，属性，查看图片大小---注意：图片大小指的是字节数)，
+      //图片会以原本格式展现
+      // {test:/\.jpg|png|gif|bmp$/,use:'url-loader?limit=5948'}  
+      //经过以上两步后，图片正常显示，并且保持了原本格式，但是图片名称被改成了hash值，如果想保持图片原有名称
+      //可以增加name限制 ---name=[name].[ext]代表原有的图片名称
+      // {test:/\.jpg|png|gif|bmp$/,use:'url-loader?limit=5948&name=[name].[ext]'}
+      //同时你也可以以hash值+原本名字配合使用 
+      {test:/\.jpg|png|gif|bmp$/,use:'url-loader?limit=5948&name=[hash:8]-[name].[ext]'}
+    ]
+  }
+}
+```
+
++ index.js
+
+```
+import $ from 'jquery';
+import './css/a.css';  //引入css
+import './css/b.scss';  //引入scss
+import './css/c.less';  //引入less
+
+$(function(){
+  $('li:even').css('background','red');
+  $('li:odd').css('background','yellow');
+})
+```
